@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aptitude à une cure thermale – Check-list</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f4f6fa;
+      --card: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --danger: #b91c1c;
+      --warning: #b45309;
+      --ok: #166534;
+      --text: #111827;
+      --muted: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e0ecff, #f9fafb);
+      color: var(--text);
+    }
+
+    .app {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      margin: 0 0 6px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    h1 span.logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      margin: 12px 0 6px;
+    }
+
+    .card small {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .field-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .field {
+      flex: 1 1 150px;
+      min-width: 0;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+    }
+
+    .field textarea {
+      resize: vertical;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      margin-top: 2px;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-abs {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .badge-rel {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .actions {
+      margin: 12px 0 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.05s ease, box-shadow 0.05s ease, background 0.1s ease;
+    }
+
+    button.primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.35);
+    }
+
+    button.primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(37, 99, 235, 0.4);
+    }
+
+    button.secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    button.secondary:hover {
+      background: #d1d5db;
+    }
+
+    .result {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      background: #f3f4f6;
+      border: 1px dashed #d1d5db;
+    }
+
+    .result-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .status-ok {
+      color: var(--ok);
+    }
+
+    .status-warning {
+      color: var(--warning);
+    }
+
+    .status-danger {
+      color: var(--danger);
+    }
+
+    .result ul {
+      margin: 4px 0 0 18px;
+      padding: 0;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <header>
+      <h1>
+        <span class="logo">T</span>
+        Grille d’aptitude à une cure thermale
+      </h1>
+      <p>Outil rapide d’aide à la décision clinique. A utiliser en complément du jugement médical.</p>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>1. Informations patient</h2>
+        <div class="field-row">
+          <div class="field">
+            <label for="nom">Nom / Initiales</label>
+            <input id="nom" type="text" placeholder="Ex. M. X..." />
+          </div>
+          <div class="field">
+            <label for="age">Âge</label>
+            <input id="age" type="number" min="0" max="120" placeholder="Années" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="orientation">Orientation envisagée</label>
+            <select id="orientation">
+              <option value="">— sélectionner —</option>
+              <option value="RH">Rhumatologie (RH)</option>
+              <option value="VR">Voies respiratoires (VR)</option>
+              <option value="DER">Dermatologie (DER)</option>
+              <option value="METAB">Métabolique / Obésité</option>
+              <option value="MCA">Cardio-artériel (MCA)</option>
+              <option value="AUTRE">Autre / à préciser</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pathologies">Pathologies / contexte (résumé)</label>
+          <textarea id="pathologies" rows="3" placeholder="Ex. arthrose, asthme, DT2..."></textarea>
+        </div>
+
+      </section>
+
+      <section class="card">
+        <h2>
+          2. Contre-indications <span class="badge badge-abs">Absolues</span>
+        </h2>
+        <p class="hint">D’après la grille des contre-indications de médecine thermale.</p>
+
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Cancer en phase évolutive" />
+            <span>Cancer en phase évolutive</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="AVC ou infarctus du myocarde &lt; 6 mois" />
+            <span>AVC ou infarctus du myocarde &lt; 6 mois</span>
+          </label>
+           <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Chirurgie récente (&lt; 3 mois)" />
+            <span>Chirurgie récente (&lt; 3 mois)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Déficit immunitaire profond" />
+            <span>Déficit immunitaire profond</span>
+          </label>
+           <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Mucoviscidose" />
+            <span>Mucoviscidose</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Phlébite &lt; 3 mois" />
+            <span>Phlébite &lt; 3 mois</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="HTA non stabilisée" />
+            <span>Hypertension artérielle non stabilisée</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Maladie infectieuse en cours" />
+            <span>Maladie infectieuse en cours (respiratoire, cutanée, etc.)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Insuffisance d’organe sévère" />
+            <span>Insuffisance d’organe sévère (cardiaque, respiratoire, rénale, hépatique…)</span>
+          </label>
+		            <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Pathologie inflammatoire en poussée" />
+            <span>Pathologie inflammatoire en poussée</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Troubles psychiatriques ou cognitifs sévères" />
+            <span>Troubles psychiatriques ou cognitifs sévères</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Épilepsie non stabilisée" />
+            <span>Épilepsie non stabilisée</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Incontinence urinaire ou fécale" />
+            <span>Incontinence urinaire ou fécale</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Altération sévère de l’état général / cachexie" />
+            <span>Altération sévère de l’état général / cachexie</span>
+          </label>
+
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="absolute" value="Désaturation au repos" />
+            <span>Désaturation au repos</span>
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>
+          3. Contre-indications <span class="badge badge-rel">Relatives</span>
+        </h2>
+        <p class="hint">Imposent une adaptation des soins (température, intensité, type de techniques).</p>
+
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="relative" value="Insuffisance veineuse importante (soins chauds statiques)" />
+            <span>Insuffisance veineuse importante (soins chauds statiques à éviter)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="relative" value="Ostéoporose sévère + anticoagulant ou antiagrégant" />
+            <span>Ostéoporose sévère et prise d’anticoagulant / antiagrégant (jets puissants à éviter)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="relative" value="Neuropathie (risque brûlures soins trop chauds)" />
+            <span>Neuropathie (risque de brûlures si soins trop chauds)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="relative" value="Coronaropathie ou HTA sévère stabilisée (prudence soins chauds généralisés)" />
+            <span>Coronaropathie ou HTA sévère stabilisée (prudence avec les soins chauds généralisés)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="relative" value="Plaie non infectée (protection par pansement occlusif)" />
+            <span>Plaie non infectée (protection par pansement occlusif imperméable)</span>
+          </label>
+
+          <label class="checkbox-item">
+            <input type="checkbox" data-type="relative" value="Désaturation à l’effort (SpO₂ < 90 % au TM6 ou chute ≥ 4 points)" />
+            <span>Désaturation à l’effort (SpO₂ &lt; 90 % au TM6 ou chute ≥ 4 points)</span>
+          </label>
+        </div>
+
+        <h3>Autres éléments de prudence (note perso)</h3>
+        <div class="field">
+          <textarea id="notes" rows="3" placeholder="Ex. traitement antifibrosant, RA modérée, etc."></textarea>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>4. Résultat & synthèse</h2>
+        <div class="actions">
+          <button class="primary" id="btnEval">
+            ⚖️ Évaluer l’aptitude à la cure
+          </button>
+          <button class="secondary" id="btnReset">
+            ♻️ Réinitialiser
+          </button>
+        </div>
+
+        <div id="result" class="result">
+          <div class="result-title">En attente d’évaluation.</div>
+          <div class="result-body">
+            Cochez les éléments pertinents puis cliquez sur <strong>« Évaluer »</strong>.
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      Outil pédagogique local – à adapter à votre pratique. Ne remplace pas la décision clinique.<br>
+      <span style="font-size:0.7rem; opacity:0.7;">
+        © 2025 – Dr Rémi Brochot. Reproduction ou diffusion interdite sans autorisation.
+      </span>
+    </footer>
+  </div>
+
+  <script>
+    function evaluate() {
+      const absolutes = Array.from(
+        document.querySelectorAll('input[type="checkbox"][data-type="absolute"]')
+      );
+      const relatives = Array.from(
+        document.querySelectorAll('input[type="checkbox"][data-type="relative"]')
+      );
+
+      const absChecked = absolutes.filter(cb => cb.checked);
+      const relChecked = relatives.filter(cb => cb.checked);
+
+      const resultDiv = document.getElementById('result');
+      const title = resultDiv.querySelector('.result-title');
+      const body = resultDiv.querySelector('.result-body');
+
+      const nom = document.getElementById('nom').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const orientation = document.getElementById('orientation').value;
+      const pathologies = document.getElementById('pathologies').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+
+      // Construction entête
+      let header = "";
+      if (nom || age || orientation) {
+        header += "<p><strong>Patient :</strong> ";
+        if (nom) header += nom + " ";
+        if (age) header += "(" + age + " ans) ";
+        if (orientation) header += "– Orientation : " + orientation + " ";
+        header += "</p>";
+      }
+
+      // CI ABSOLUES
+      if (absChecked.length > 0) {
+        title.textContent = "❌ Contre-indication ABSOLUE à la cure thermale.";
+        title.className = "result-title status-danger";
+
+        let html = header;
+        html += "<p>Au moins une contre-indication absolue est relevée :</p><ul>";
+        absChecked.forEach(cb => {
+          html += "<li>" + cb.value + "</li>";
+        });
+        html += "</ul>";
+
+        if (relChecked.length > 0) {
+          html += "<p>Contre-indications relatives associées :</p><ul>";
+          relChecked.forEach(cb => {
+            html += "<li>" + cb.value + "</li>";
+          });
+          html += "</ul>";
+        }
+
+        if (pathologies) html += "<p><strong>Contexte :</strong> " + pathologies + "</p>";
+        if (notes) html += "<p><strong>Notes :</strong> " + notes + "</p>";
+
+        body.innerHTML = html;
+        return;
+      }
+
+      // CI RELATIVES
+      if (relChecked.length > 0) {
+        title.textContent = "⚠️ Pas de CI absolue, mais prudence.";
+        title.className = "result-title status-warning";
+
+        let html = header;
+        html += "<p>Aucune contre-indication absolue n’est cochée.</p>";
+        html += "<p>Contre-indications relatives nécessitant adaptation des soins :</p><ul>";
+        relChecked.forEach(cb => {
+          html += "<li>" + cb.value + "</li>";
+        });
+        html += "</ul>";
+
+        if (pathologies) html += "<p><strong>Contexte :</strong> " + pathologies + "</p>";
+        if (notes) html += "<p><strong>Notes :</strong> " + notes + "</p>";
+
+        body.innerHTML = html;
+        return;
+      }
+
+      // Aucune CI
+      title.textContent = "✅ Aucune contre-indication retrouvée.";
+      title.className = "result-title status-ok";
+
+      let html = header;
+      html += "<p>Aucune contre-indication absolue ou relative n’a été cochée.</p>";
+      html += "<p>La cure thermale peut être envisagée.</p>";
+
+      if (pathologies) html += "<p><strong>Contexte :</strong> " + pathologies + "</p>";
+      if (notes) html += "<p><strong>Notes :</strong> " + notes + "</p>";
+
+      body.innerHTML = html;
+    }
+
+    function resetAll() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => (cb.checked = false));
+      document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(el => (el.value = ""));
+      document.getElementById('orientation').value = "";
+
+      const resultDiv = document.getElementById('result');
+      const title = resultDiv.querySelector('.result-title');
+      const body = resultDiv.querySelector('.result-body');
+
+      title.textContent = "En attente d’évaluation.";
+      title.className = "result-title";
+      body.innerHTML = 'Cochez les éléments pertinents puis cliquez sur <strong>« Évaluer »</strong>.';
+    }
+
+    document.getElementById('btnEval').addEventListener('click', evaluate);
+    document.getElementById('btnReset').addEventListener('click', resetAll);
+  </script>
+</body>
+</html>
